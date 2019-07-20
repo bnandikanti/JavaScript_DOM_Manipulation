@@ -24,12 +24,18 @@ submit.on("click", function() {
   // Prevent the page from refreshing
   d3.event.preventDefault();
 
-  // Select the input element and get the raw HTML node
+  // Select the input elements and get the raw HTML node
   var inputDateElement = d3.select("#datetime");
-  //var inputCityElement = d3.select("#city");
+  var inputCityElement = d3.select("#city");
+  var inputStateElement = d3.select("#state");
+  var inputCountryElement = d3.select("#country");
+  var inputShapeElement = d3.select("#shape");
   // Get the value property of the input element
   var inputDate = inputDateElement.property("value");
-  //var inputCity = inputCityElement.property("value");
+  var inputCity = inputCityElement.property("value");
+  var inputState = inputStateElement.property("value");
+  var inputCountry = inputCountryElement.property("value");
+  var inputShape = inputShapeElement.property("value");
 
   //Clear the old values
   tbody.html("");
@@ -37,8 +43,11 @@ submit.on("click", function() {
   var sightingsByDate = data.filter(dateFilter);
    // Create a custom filtering function
   function dateFilter(sighting) {
-    return sighting.datetime  == inputDate 
-    //&& sighting.city == inputCity
+    return sighting.datetime  == inputDate && 
+    sighting.city == inputCity.toString().toLowerCase() &&
+    sighting.state == inputState.toString().toLowerCase() &&
+    sighting.country == inputCountry.toString().toLowerCase() &&
+    sighting.shape == inputShape.toString().toLowerCase();
   }
  
 //Render the results to the page
@@ -56,6 +65,10 @@ submit.on("click", function() {
 
   
   console.log(inputDate);
-  //console.log(inputCity);
+  console.log(inputCity);
+  console.log(inputStateElement);
+  // console.log(inputState);
+  console.log(inputShape);
+  console.log(inputCountry);
 
 });
